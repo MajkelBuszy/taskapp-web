@@ -1,10 +1,12 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
-export const TaskDateField: FC = (): ReactElement => {
-    const [date, setDate] = useState<Date | null>(null);
+import { IDateField } from '../../interfaces/taskForm';
+
+export const TaskDateField: FC<IDateField> = (props): ReactElement => {
+    const { value = new Date(), onChange = (e) => e, disabled = false } = props;
 
     return (
         <>
@@ -12,12 +14,11 @@ export const TaskDateField: FC = (): ReactElement => {
                 dateAdapter={AdapterDateFns}
             >
                 <DesktopDatePicker
-                    value={date}
-                    onChange={(newDate) => {
-                        setDate(newDate);
-                    }}
+                    value={value}
+                    onChange={onChange}
                     format='dd/MM/yyyy'
                     label='Task date'
+                    disabled={disabled}
                 />
             </LocalizationProvider>
         </>
