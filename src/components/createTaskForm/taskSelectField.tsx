@@ -1,10 +1,11 @@
 import React, { FC, ReactElement } from 'react';
 import { MenuItem, FormControl, InputLabel, Select, SelectChangeEvent } from '@mui/material';
+import PropTypes from 'prop-types';
 
 import { ISelectField } from '../../interfaces/taskForm';
 
 export const TaskSelectField: FC<ISelectField> = (props): ReactElement => {
-    const { name = 'selectBox', value, label, items = [{value: '', label: 'Add Items'}], disabled = false, onChange = (e: SelectChangeEvent) => console.log(e) } = props;
+    const { name = 'selectBox', value = '', label = 'Select Box', items = [{value: '', label: 'Add Items'}], disabled = false, onChange = (e: SelectChangeEvent) => console.log(e) } = props;
 
     return (
         <FormControl fullWidth size='small'>
@@ -30,4 +31,16 @@ export const TaskSelectField: FC<ISelectField> = (props): ReactElement => {
             </Select>
         </FormControl>
     );
+}
+
+TaskSelectField.propTypes = {
+    onChange: PropTypes.func,
+    label: PropTypes.string,
+    name: PropTypes.string,
+    disabled: PropTypes.bool,
+    items: PropTypes.arrayOf(PropTypes.shape({
+            value: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired
+        }).isRequired
+    ),
 }
