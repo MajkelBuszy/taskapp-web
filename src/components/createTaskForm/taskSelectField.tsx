@@ -26,8 +26,6 @@ export const TaskSelectField: FC<ISelectField> = (props): ReactElement => {
                         )
                     })
                 }
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
             </Select>
         </FormControl>
     );
