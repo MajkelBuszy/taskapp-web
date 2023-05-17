@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 
 import { TaskHeader } from './taskHeader';
 import { TaskDescription } from './taskDescription';
+import { TaskActions } from './taskActions';
 
 export const Task: FC = (): ReactElement => {
     return (
@@ -15,7 +16,7 @@ export const Task: FC = (): ReactElement => {
             p={4}
             sx={{
                 width: '100%',
-                backgroundColor: 'backround.paper',
+                backgroundColor: 'grey.900',
                 borderRadius: '8px',
                 border: '1px solid',
                 borderColor: 'error.light'
@@ -23,6 +24,7 @@ export const Task: FC = (): ReactElement => {
         >
             <TaskHeader />
             <TaskDescription />
+            <TaskActions />
         </Box>
     );
 }
