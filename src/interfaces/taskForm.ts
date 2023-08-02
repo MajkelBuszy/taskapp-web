@@ -1,12 +1,14 @@
-import { SelectChangeEvent } from "@mui/material";
-import React from "react";
+import { SelectChangeEvent } from '@mui/material';
+import React from 'react';
 
 export interface ITaskFieldDisabled {
     disabled?: boolean;
 }
 
 export interface ITextField extends ITaskFieldDisabled {
-    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
+    onChange?: (
+        e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+    ) => void;
 }
 
 export interface IDateField extends ITaskFieldDisabled {
@@ -24,5 +26,13 @@ export interface ISelectField extends ITaskFieldDisabled {
     label?: string;
     value?: string;
     onChange?: (e: SelectChangeEvent) => void;
-    items?: ISelectItems[]
+    items?: ISelectItems[];
+}
+
+export interface ICreateTask {
+    title: string;
+    description: string;
+    date: string;
+    status: string;
+    priority: string;
 }
