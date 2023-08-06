@@ -18,15 +18,16 @@ export const Task: FC<ITask> = (props): ReactElement => {
         description = 'n/a',
         status = Status.done,
         onClick = (e) => e,
-        onStatusChange = (e) => e
-    }  = props;
+        onStatusChange = (e) => e,
+        id,
+    } = props;
 
     return (
         <Box
-            display='flex'
-            width='100%'
-            justifyContent='flex-start'
-            flexDirection='column'
+            display="flex"
+            width="100%"
+            justifyContent="flex-start"
+            flexDirection="column"
             mb={4}
             p={2}
             sx={{
@@ -39,10 +40,15 @@ export const Task: FC<ITask> = (props): ReactElement => {
         >
             <TaskHeader title={title} date={date} />
             <TaskDescription description={description} />
-            <TaskActions onClick={onClick} onStatusChange={onStatusChange} />
+            <TaskActions
+                id={id}
+                status={status}
+                onClick={onClick}
+                onStatusChange={onStatusChange}
+            />
         </Box>
     );
-}
+};
 
 Task.propTypes = {
     title: PropTypes.string,
@@ -51,5 +57,5 @@ Task.propTypes = {
     onStatusChange: PropTypes.func,
     onClick: PropTypes.func,
     priority: PropTypes.oneOf([Priority.high, Priority.low, Priority.medium]),
-    status: PropTypes.oneOf([Status.done, Status.inProgress, Status.todo])
-}
+    status: PropTypes.oneOf([Status.done, Status.inProgress, Status.todo]),
+};
