@@ -5,19 +5,23 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { customTheme } from './theme/customTheme';
 import { Dashboard } from './pages/dashboard/dashboard';
+import { ComposeContext } from './context/composeContext';
+import { rootContext } from './context/rootContext';
 
 const queryClient = new QueryClient();
 
 const App: FC = (): ReactElement => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={customTheme}>
-        <CssBaseline />
-        <Dashboard />
-      </ThemeProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  );
+    return (
+        <QueryClientProvider client={queryClient}>
+            <ComposeContext components={rootContext}>
+                <ThemeProvider theme={customTheme}>
+                    <CssBaseline />
+                    <Dashboard />
+                </ThemeProvider>
+            </ComposeContext>
+            <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+    );
 };
 
 export default App;

@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useContext, useEffect } from 'react';
 import { Grid, Box, Alert, LinearProgress } from '@mui/material';
 
 import { format } from 'date-fns';
@@ -9,8 +9,11 @@ import { sendApiRequest } from '../../helpers/sendApiRequest';
 import { TaskApi, UpdateTaskApi } from '../../interfaces/taskApi';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { countTasks } from '../../helpers/countTasks';
+import { TaskStatusChangedContext } from '../../context/taskStatusChangedContext';
 
 export const TaskArea: FC = (): ReactElement => {
+    const taskUpdatedContext = useContext(TaskStatusChangedContext);
+
     const { error, isLoading, refetch, data } = useQuery(
         ['tasks'],
         async () =>
@@ -23,6 +26,16 @@ export const TaskArea: FC = (): ReactElement => {
     const updateTaskMutation = useMutation((body: UpdateTaskApi) =>
         sendApiRequest('http://localhost:8765/tasks', 'PATCH', body),
     );
+
+    useEffect(() => {
+        refetch();
+    }, [taskUpdatedContext.updated]);
+
+    useEffect(() => {
+        if (updateTaskMutation.isSuccess) {
+            taskUpdatedContext.toggle();
+        }
+    }, [updateTaskMutation.isSuccess]);
 
     const onStatusChangeHandler = (
         e: React.ChangeEvent<HTMLInputElement>,
